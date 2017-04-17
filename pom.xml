@@ -98,7 +98,7 @@
                     <appendAssemblyId>false</appendAssemblyId>
                     <archive>
                         <manifest>
-                            <mainClass>Main</mainClass>
+                            <mainClass>com.robbiedaves.simplesparkblog.BlogService</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -115,7 +115,7 @@
                     <processTypes>
                         <!-- Tell Heroku how to launch your application -->
                         <!-- You might have to remove the ./ in front   -->
-                        <web>java -jar ./target/my-app-1.0-jar-with-dependencies.jar</web>
+                        <web>java -jar ./target/simple-spark-blog.jar</web>
                     </processTypes>
                 </configuration>
             </plugin>
