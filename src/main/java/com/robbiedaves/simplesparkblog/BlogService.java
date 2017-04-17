@@ -2,6 +2,7 @@ package com.robbiedaves.simplesparkblog;
 
 import static spark.Spark.get;
 import static spark.Spark.post;
+import static spark.SparkBase.port;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,6 +24,14 @@ import java.util.stream.Collectors;
 public class BlogService {
 
     private static final int HTTP_BAD_REQUEST = 400;
+
+    static int getHerokuAssignedPort() {
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        if (processBuilder.environment().get("PORT") != null) {
+            return Integer.parseInt(processBuilder.environment().get("PORT"));
+        }
+        return 4567; //return default port if heroku-port isn't set (i.e. on localhost)
+    }
 
     interface Validable {
         boolean isValid();
@@ -81,6 +90,7 @@ public class BlogService {
     }
 
     public static void main( String[] args) {
+        port(getHerokuAssignedPort());
         Model model = new Model();
 
         // insert a post (using HTTP post method)
